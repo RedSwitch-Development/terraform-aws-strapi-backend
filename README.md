@@ -9,3 +9,5 @@ Whenever this module is updated, both the Github tag must be incremented to matc
 |---------|---------------------|--------------------------------|
 | 1.0.0   | Daniel Quinones     | Initial Module                 |
 | 1.0.1   | Daniel Quinones     | Remove unnecessary variables   |
+| 1.0.2   | Daniel Quinones     | Update env vars array          |
+| 1.0.3   | Daniel Quinones     | Extend IAM permissions array   |

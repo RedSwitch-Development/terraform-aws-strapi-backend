@@ -127,7 +127,23 @@ resource "aws_iam_role" "service_task_role" {
 
     policy = jsonencode({
       Version   = "2012-10-17"
-      Statement = var.task_iam_permissions
+      Statement = concat(var.task_iam_permissions, [
+        {
+          Action   = ["cloudwatch:*"]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+        {
+          Action   = ["rds:*"]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+        {
+          Action   = ["ecs:*"]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ])
     })
   }
 

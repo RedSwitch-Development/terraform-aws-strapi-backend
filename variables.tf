@@ -82,7 +82,7 @@ variable "environment_variables" {
     name  = string
     value = string
   }))
-  description = "Environment variables for the Task Definition service"
+  description = "Environment variables for the Task Definition service. This module will include the env vars necessary for a Strapi database connection"
 }
 
 variable "task_iam_permissions" {
@@ -92,7 +92,7 @@ variable "task_iam_permissions" {
     Effect   = string
     Resource = string
   }))
-  description = "Permissions statement array for task IAM role"
+  description = "Permissions statement array for task IAM role. This module will include the base permissions needed for a Strapi ECS service"
 }
 
 variable "db_engine" {
