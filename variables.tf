@@ -13,11 +13,6 @@ variable "vpc_id" {
   description = "VPC id for Target Group of the application"
 }
 
-variable "alb_listener_arn" {
-  type        = string
-  description = "ARN of the main ALB Listener"
-}
-
 variable "service_name" {
   type        = string
   description = "Name of the service that these resources belong to"
@@ -35,23 +30,13 @@ variable "application_url" {
 
 variable "ecs_cluster_name" {
   type        = string
-  description = "Name of ECS cluster"
-}
-
-variable "container_name" {
-  type        = string
-  description = "Name of ECR Container"
+  description = "Name of ECS cluster that will host the ECS Services"
 }
 
 variable "container_port" {
   default     = 80
   type        = number
   description = "Default port to be exposed in ECR Container"
-}
-
-variable "ecr_image_name" {
-  type        = string
-  description = "Image name to be used in the task definition creation"
 }
 
 variable "instance_count" {
@@ -75,11 +60,6 @@ variable "memory" {
   description = "Memory allocated for the task definition in MB"
 }
 
-variable "task_role_arn" {
-  type        = string
-  description = "ARN for ECS instance to access other aws services"
-}
-
 variable "subnets" {
   type        = list(string)
   description = "List of Subnet ids to be used by application and database"
@@ -94,11 +74,6 @@ variable "force_new_deployment" {
   type        = bool
   default     = true
   description = "If true, ecs service will redeploy on every terraform apply"
-}
-
-variable "target_group_arn" {
-  type        = string
-  description = "ARN of Load Balancer Target Group"
 }
 
 variable "environment_variables" {

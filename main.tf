@@ -21,7 +21,7 @@ resource "aws_ecs_task_definition" "service_definition" {
   container_definitions = jsonencode([
     {
       name      = "${var.service_name}"
-      image     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_image_name}:latest"
+      image     = "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.service_name}:latest"
       essential = true
       portMappings = [
         {
@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "service_definition" {
     }
   ])
 
-  task_role_arn      = var.task_role_arn
+  task_role_arn      = aws_iam_role.service_task_role.arn
   execution_role_arn = aws_iam_role.service_execution_role.arn
 
   tags = {
@@ -55,15 +55,15 @@ resource "aws_ecs_service" "service" {
   cluster         = var.ecs_cluster_name
   task_definition = var.service_name
   desired_count   = var.instance_count
-  depends_on      = [var.task_role_arn, aws_ecs_task_definition.service_definition]
+  depends_on      = [aws_iam_role.service_task_role.arn, aws_ecs_task_definition.service_definition]
 
   force_new_deployment = var.force_new_deployment
 
   launch_type = var.ecs_launch_type
 
   load_balancer {
-    target_group_arn = var.target_group_arn
-    container_name   = var.container_name
+    target_group_arn = aws_lb_target_group.back_end.arn
+    container_name   = var.service_name
     container_port   = var.container_port
   }
 
@@ -191,7 +191,7 @@ resource "aws_alb_listener_rule" "back_end" {
     }
   }
 
-  listener_arn = var.alb_listener_arn
+  listener_arn = aws_lb_target_group.back_end.arn
 
   depends_on = [
     aws_lb_target_group.back_end
