@@ -254,7 +254,7 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 2.0"
 
-  identifier = local.service_name
+  identifier = var.service_name
 
   engine               = var.db_engine
   engine_version       = var.db_engine_version
@@ -269,7 +269,7 @@ module "db" {
 
   iam_database_authentication_enabled = true
 
-  vpc_security_group_ids = [data.aws_security_group.default.id]
+  vpc_security_group_ids = [var.security_group]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
