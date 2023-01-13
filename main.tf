@@ -228,7 +228,7 @@ resource "aws_alb_listener_rule" "back_end" {
     }
   }
 
-  listener_arn = aws_lb_target_group.back_end.arn
+  listener_arn = var.ssl_listener_arn
 
   depends_on = [
     aws_lb_target_group.back_end

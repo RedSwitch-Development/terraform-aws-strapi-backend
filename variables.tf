@@ -33,6 +33,11 @@ variable "ecs_cluster_name" {
   description = "Name of ECS cluster that will host the ECS Services"
 }
 
+variable "ssl_listener_arn" {
+  type        = string
+  description = "ARN of SSL ALB Listener that sits on port 443"
+}
+
 variable "container_port" {
   default     = 80
   type        = number
