@@ -76,7 +76,7 @@ resource "aws_ecs_service" "service" {
   cluster         = var.ecs_cluster_name
   task_definition = var.service_name
   desired_count   = var.instance_count
-  depends_on      = [aws_iam_role.service_task_role.arn, aws_ecs_task_definition.service_definition]
+  depends_on      = [aws_iam_role.service_task_role, aws_ecs_task_definition.service_definition]
 
   force_new_deployment = var.force_new_deployment
 
