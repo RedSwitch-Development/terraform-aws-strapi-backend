@@ -10,3 +10,4 @@ Whenever this module is updated, both the Github tag must be incremented to matc
 | 1.0.0   | Daniel Quinones     | Initial Module                    |
 | 1.1.0   | Daniel Quinones     | Update DB Module                  |
 | 1.1.1   | Daniel Quinones     | Remove unsupported db module var  |
+| 1.2.0   | Daniel Quinones     | Fix References                    |

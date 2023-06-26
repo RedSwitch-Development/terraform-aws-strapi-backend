@@ -40,23 +40,23 @@ resource "aws_ecs_task_definition" "service_definition" {
       environment = concat(var.environment_variables, [
         {
           name : "DATABASE_HOST",
-          value : "${tostring(module.db.this_db_instance_address)}"
+          value : "${tostring(module.db.db_instance_address)}"
         },
         {
           name : "DATABASE_PORT",
-          value : "${tostring(module.db.this_db_instance_port)}"
+          value : "${tostring(module.db.db_instance_port)}"
         },
         {
           name : "DATABASE_NAME",
-          value : "${tostring(module.db.this_db_instance_name)}"
+          value : "${tostring(module.db.db_instance_name)}"
         },
         {
           name : "DATABASE_USERNAME",
-          value : "${tostring(module.db.this_db_instance_username)}"
+          value : "${tostring(module.db.db_instance_username)}"
         },
         {
           name : "DATABASE_PASSWORD",
-          value : "${tostring(module.db.this_db_instance_password)}"
+          value : "${tostring(var.db_password)}"
         },
       ])
     }
