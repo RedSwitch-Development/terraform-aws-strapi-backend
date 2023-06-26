@@ -39,24 +39,24 @@ resource "aws_ecs_task_definition" "service_definition" {
       }
       environment = concat(var.environment_variables, [
         {
-          name: "DATABASE_HOST",
-          value: "${tostring(module.db.this_db_instance_address)}"
+          name : "DATABASE_HOST",
+          value : "${tostring(module.db.this_db_instance_address)}"
         },
         {
-          name: "DATABASE_PORT",
-          value: "${tostring(module.db.this_db_instance_port)}"
+          name : "DATABASE_PORT",
+          value : "${tostring(module.db.this_db_instance_port)}"
         },
         {
-          name: "DATABASE_NAME",
-          value: "${tostring(module.db.this_db_instance_name)}"
+          name : "DATABASE_NAME",
+          value : "${tostring(module.db.this_db_instance_name)}"
         },
         {
-          name: "DATABASE_USERNAME",
-          value: "${tostring(module.db.this_db_instance_username)}"
+          name : "DATABASE_USERNAME",
+          value : "${tostring(module.db.this_db_instance_username)}"
         },
         {
-          name: "DATABASE_PASSWORD",
-          value: "${tostring(module.db.this_db_instance_password)}"
+          name : "DATABASE_PASSWORD",
+          value : "${tostring(module.db.this_db_instance_password)}"
         },
       ])
     }
@@ -126,7 +126,7 @@ resource "aws_iam_role" "service_task_role" {
     name = "${var.service_name}-task-role-policy"
 
     policy = jsonencode({
-      Version   = "2012-10-17"
+      Version = "2012-10-17"
       Statement = concat(var.task_iam_permissions, [
         {
           Action   = ["cloudwatch:*"]
@@ -252,7 +252,7 @@ resource "aws_cloudwatch_log_group" "service_logs" {
 ############
 module "db" {
   source  = "terraform-aws-modules/rds/aws"
-  version = "~> 2.0"
+  version = "6.0.0"
 
   identifier = var.service_name
 
@@ -262,7 +262,7 @@ module "db" {
   instance_class       = var.db_instance_class
   allocated_storage    = var.db_allocated_storage
 
-  name     = var.db_name
+  db_name  = var.db_name
   username = var.db_username
   password = var.db_password
   port     = var.db_port
