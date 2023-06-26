@@ -285,9 +285,6 @@ module "db" {
   # DB parameter group
   create_db_parameter_group = false
 
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "${var.service_name}-snapshot"
-
   # Database Deletion Protection
   deletion_protection = true
 
